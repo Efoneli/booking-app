@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -10,7 +11,7 @@ const conferenceTickets = 50
 
 var conferenceName = "Go Conference"
 var remainingTickets uint = 50
-var bookings = []string{}
+var bookings = make([]map[string]string)
 
 func main() {
 	greetUsers()
@@ -93,6 +94,15 @@ func getUserInput() (string, string, string, uint) {
 
 func bookTickets(userTickets uint, firstName string, lastName string, email string) {
 	remainingTickets = remainingTickets - userTickets
+
+	// create a map for user
+
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	strconv.FormatInt(uint64(userTickets), 10)
+
 	bookings = append(bookings, firstName+" "+lastName)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v.\n", firstName, lastName, userTickets, email)
